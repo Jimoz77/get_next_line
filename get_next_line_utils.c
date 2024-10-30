@@ -6,42 +6,46 @@
 /*   By: jimpa <jimpa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 13:51:52 by jimpa             #+#    #+#             */
-/*   Updated: 2024/10/28 17:00:34 by jimpa            ###   ########.fr       */
+/*   Updated: 2024/10/29 18:02:10 by jimpa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-// attention ne pas oublier le \0
+
 char	*ft_strconc(const char *source, char *dest)
 {
-    int		i;
-    int		j;
-    char	*new_dest;
-    int		dest_len;
-    int		source_len;
+	int		i;
+	int		j;
+	char	*new_dest;
+	int		dest_len;
+	int		source_len;
 
-    if (!dest)
-        dest_len = 0;
-    else
-        dest_len = ft_strlen(dest);
-    source_len = ft_strlen((char *)source);
-    new_dest = (char *)malloc(dest_len + source_len + 1);
-    if (!new_dest)
-        return (NULL);
-    i = 0;
-    while (i < dest_len)
-    {
-        new_dest[i] = dest[i];
-        i++;
-    }
-    j = 0;
-    while (j < source_len)
-    {
-        new_dest[i + j] = source[j];
-        j++;
-    }
-    new_dest[i + j] = '\0';
-    return (new_dest);
+	if (!dest)
+		dest_len = 0;
+	else
+		dest_len = ft_strlen(dest);
+	source_len = ft_strlen((char *)source);
+	new_dest = (char *)malloc(dest_len + source_len + 1);
+	if (!new_dest)
+	{
+		free(dest);
+		return (NULL);
+	}
+	i = 0;
+	while (i < dest_len)
+	{
+		new_dest[i] = dest[i];
+		i++;
+	}
+	j = 0;
+	while (j < source_len)
+	{
+		new_dest[i + j] = source[j];
+		j++;
+	}
+	new_dest[i + j] = '\0';
+	free(dest);
+	return (new_dest);
 }
 
 char	*ft_copy_til_bs(char *str)
@@ -75,6 +79,7 @@ int	ft_strlen(char *str)
 		i++;
 	return (i);
 }
+
 void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
 	unsigned char		*result;
@@ -127,10 +132,11 @@ void	*ft_memmove(void *dst, const void *src, size_t n)
 }
 void	remove_before_newline(char *str)
 {
-	char *newline_pos = ft_strchr(str, '\n');
+	char	*newline_pos;
+
+	newline_pos = ft_strchr(str, '\n');
 	if (newline_pos)
 	{
-		// Déplacez tous les caractères après '\n' au début de la chaîne
 		ft_memmove(str, newline_pos + 1, ft_strlen(newline_pos));
 	}
 }
@@ -158,4 +164,29 @@ char	*ft_strdup(const char *str)
 	}
 	copy[i] = '\0';
 	return (copy);
+}
+
+void	*ft_calloc(size_t num, size_t size)
+{
+	unsigned char	*s;
+	void			*slot;
+	size_t			totalen;
+
+	if (num != 0 && size > SIZE_MAX / num)
+	{
+		return (NULL);
+	}
+	slot = malloc(size * num);
+	if (!slot)
+	{
+		return (NULL);
+	}
+	s = (unsigned char *)slot;
+	totalen = num * size;
+	while (totalen)
+	{
+		*s++ = '\0';
+		totalen--;
+	}
+	return (slot);
 }

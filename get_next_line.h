@@ -6,7 +6,7 @@
 /*   By: jimpa <jimpa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 13:51:05 by jimpa             #+#    #+#             */
-/*   Updated: 2024/10/28 17:23:55 by jimpa            ###   ########.fr       */
+/*   Updated: 2024/10/29 17:34:45 by jimpa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,5 @@ int		ft_strlen(char *str);
 void	*ft_memmove(void *dst, const void *src, size_t len);
 void	remove_before_newline(char *str);
 char	*ft_strdup(const char *str);
-
+void	*ft_calloc(size_t num, size_t size);
 #endif
