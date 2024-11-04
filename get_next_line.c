@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jimpa <jimpa@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jiparcer <jiparcer@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 13:52:09 by jimpa             #+#    #+#             */
-/*   Updated: 2024/10/30 16:49:35 by jimpa            ###   ########.fr       */
+/*   Updated: 2024/11/04 13:05:39 by jiparcer         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,10 @@ char	*get_next_line(int fd)
 		{
 			free(buffer);
 			if (stash)
+			{
 				free(stash);
+				stash = NULL;
+			}
 			return (NULL);
 		}
 		buffer[is_end] = '\0';
@@ -74,6 +77,6 @@ char	*get_next_line(int fd)
 	{
 		free(stash);
 		stash = NULL;
-	}
+	} 
 	return (NULL);
 }
