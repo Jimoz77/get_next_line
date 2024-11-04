@@ -6,7 +6,7 @@
 /*   By: jimpa <jimpa@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 13:51:52 by jimpa             #+#    #+#             */
-/*   Updated: 2024/10/29 18:02:10 by jimpa            ###   ########.fr       */
+/*   Updated: 2024/11/04 14:27:41 by jimpa            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,22 +96,6 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 	return (dest);
 }
 
-char	*ft_strchr(const char *s, int c)
-{
-	int	i;
-
-	i = 0;
-	while (s[i])
-	{
-		if (s[i] == (char)c)
-			return ((char *)(s + i));
-		i++;
-	}
-	if (s[i] == (char)c)
-		return ((char *)(s + i));
-	return (NULL);
-}
-
 void	*ft_memmove(void *dst, const void *src, size_t n)
 {
 	const char	*tmp;
@@ -129,64 +113,4 @@ void	*ft_memmove(void *dst, const void *src, size_t n)
 		ft_memcpy(dest, tmp, n);
 	}
 	return (dst);
-}
-void	remove_before_newline(char *str)
-{
-	char	*newline_pos;
-
-	newline_pos = ft_strchr(str, '\n');
-	if (newline_pos)
-	{
-		ft_memmove(str, newline_pos + 1, ft_strlen(newline_pos));
-	}
-}
-
-char	*ft_strdup(const char *str)
-{
-	int		i;
-	char	*copy;
-
-	i = 0;
-	while (str[i])
-	{
-		i++;
-	}
-	copy = (char *)malloc(sizeof(char) * i + 1);
-	if (!copy)
-	{
-		return (NULL);
-	}
-	i = 0;
-	while (str[i])
-	{
-		copy[i] = str[i];
-		i++;
-	}
-	copy[i] = '\0';
-	return (copy);
-}
-
-void	*ft_calloc(size_t num, size_t size)
-{
-	unsigned char	*s;
-	void			*slot;
-	size_t			totalen;
-
-	if (num != 0 && size > SIZE_MAX / num)
-	{
-		return (NULL);
-	}
-	slot = malloc(size * num);
-	if (!slot)
-	{
-		return (NULL);
-	}
-	s = (unsigned char *)slot;
-	totalen = num * size;
-	while (totalen)
-	{
-		*s++ = '\0';
-		totalen--;
-	}
-	return (slot);
 }
